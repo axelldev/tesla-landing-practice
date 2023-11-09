@@ -1,0 +1,21 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ModelYSection from "../components/ModelYSection.astro";
+import SnapCenter from "../components/SnapCenter.astro";
+---
+
+<Layout title="El auto de tus sueños">
+  <Navbar />
+  <main
+    class="relative h-screen w-full snap-y snap-mandatory overflow-auto overflow-x-hidden"
+  >
+    <SnapCenter>
+      <HeroSection />
+    </SnapCenter>
+    <SnapCenter>
+      <ModelYSection />
+    </SnapCenter>
+  </main>
+</Layout>

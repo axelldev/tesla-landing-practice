@@ -1,0 +1,17 @@
+---
+import ModelYActions from "./ModelYActions.astro";
+import Section from "./Section.astro";
+---
+
+<Section
+  title="Model Y"
+  description="Concertar una prueba de conduccion"
+  textColor="black"
+>
+  <ModelYActions slot="actions" />
+  <img
+    slot="bg"
+    src="/model-y.avif"
+    class="block h-screen w-screen object-cover object-center"
+  />
+</Section>

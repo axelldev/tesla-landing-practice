@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  textColor?: "white" | "black";
+  headerColor?: "white" | "black";
+}
+
+const {
+  title,
+  description,
+  headerColor = "black",
+  textColor = "black",
+} = Astro.props;
+---
+
+<section
+  class=`section charge-section relative h-screen w-screen overflow-hidden bg-black text-center text-${textColor}`
+  data-header-color={headerColor}
+>
+  <div class="relative z-10 flex h-full w-full flex-col pb-28 pt-40">
+    <header>
+      <h2 class="mb-2 text-5xl font-bold">{title}</h2>
+      <p class="text-sm font-light">{description}</p>
+    </header>
+
+    <footer class="flex flex-grow items-end justify-center gap-4">
+      <slot name="actions" />
+    </footer>
+  </div>
+
+  <div class="b-0 absolute top-0 z-0 h-full w-full">
+    <slot name="bg" />
+  </div>
+</section>

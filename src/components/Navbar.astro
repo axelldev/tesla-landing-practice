@@ -1,0 +1,84 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<header
+  id="main-navbar"
+  class="fixed top-0 z-50 flex w-full items-center justify-between px-14 py-2 font-medium text-white backdrop-blur"
+>
+  <div class="flex-grow basis-0">
+    <Logo />
+  </div>
+
+  <nav>
+    <ul
+      class="flex justify-center text-sm [&>li>a]:text-current [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+    >
+      <li><a href="#">Model S</a></li>
+      <li><a href="#">Model 3</a></li>
+      <li><a href="#">Model X</a></li>
+      <li><a href="#">Model Y</a></li>
+      <li><a href="#">Powerwall</a></li>
+      <li><a href="#">Carga</a></li>
+    </ul>
+  </nav>
+
+  <nav class="flex-grow basis-0">
+    <ul
+      class="flex justify-end text-sm [&>li>a]:text-current [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+    >
+      <li class="text-center"><a href="#">Soporte</a></li>
+      <li class="text-center"><a href="#">Tienda</a></li>
+      <li class="text-center"><a href="#">Cuenta</a></li>
+      <li class="text-center"><a href="#">Menu</a></li>
+    </ul>
+  </nav>
+
+  <div
+    id="hover-item"
+    class="absolute -z-10 rounded-sm bg-zinc-500/10 backdrop-blur-lg transition-all duration-300 ease-in-out"
+  >
+  </div>
+</header>
+
+<script>
+  const $header = document.getElementById("main-navbar");
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.9,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const { isIntersecting } = entry;
+      if (!isIntersecting) return;
+      const color = entry.target.getAttribute("data-header-color");
+      $header.style.color = color ?? "black";
+    });
+  }, observerOptions);
+
+  const $sections = document.querySelectorAll(".section");
+  $sections.forEach((section) => observer.observe(section));
+</script>
+
+<script>
+  const $navItems = document.querySelectorAll("#main-navbar li > a");
+  const $hoverItem = document.getElementById("hover-item");
+  $navItems.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      const { left, top, width, height } = item.getBoundingClientRect();
+      $hoverItem.style.opacity = "1";
+      $hoverItem.style.visibility = "visible";
+      $hoverItem.style.left = `${left}px`;
+      $hoverItem.style.top = `${top}px`;
+      $hoverItem.style.width = `${width}px`;
+      $hoverItem.style.height = `${height}px`;
+    });
+
+    item.addEventListener("mouseleave", () => {
+      $hoverItem.style.opacity = "0";
+      $hoverItem.style.visibility = "hidden";
+    });
+  });
+</script>
